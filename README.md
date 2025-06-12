@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# Money Tracking React App
 
 Make sure to put your base_api url in a `.env` file :
 ```python 

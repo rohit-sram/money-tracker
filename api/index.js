@@ -15,9 +15,17 @@ app.get('/api/test', (req , res) => {
 app.post('/api/transaction', async (req, res) => {   // await reuqires 'async'
     // console.log(process.env.MONGO_URL);
     await mongoose.connect(process.env.MONGO_URL)
-    const {name, description, datetime} = req.body;
-    res.json(req.body);
+    const {name, description, datetime, price} = req.body;
+    const transaction = await Transaction.create({name, description, datetime, price});
+    // res.json(req.body);
+    res.json(transaction);
 });
+
+app.get('/api/transactions', async (req, res) => {
+    await mongoose.connect(process.env.MONGO_URL);
+    const transactions = await Transaction.find();  // no parameters here means - we are getting all transactions
+    res.json(transactions);
+})
 
 app.listen(4000, () => {
     console.log('Server running on http://localhost:4000');
